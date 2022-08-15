@@ -5,9 +5,9 @@ const Card = ({ country, flags, continents }, props) => {
 	return (
 		<div className={s.card}>
 			<img className={s.card__image} src={flags} alt={country} />
-			<div className={s.card_info}>
-				<p style={{ fontSize: "2rem" }}>nombre: {country}</p>
-				<p style={{ fontSize: "1rem" }}>continente: {continents}</p>
+			<div className={s.card__info}>
+				<p style={{ fontSize: "2rem" }}> {country}</p>
+				<p style={{ fontSize: "1rem" }}> {continents}</p>
 			</div>
 		</div>
 	);
