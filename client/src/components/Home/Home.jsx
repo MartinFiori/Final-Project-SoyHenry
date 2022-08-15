@@ -1,23 +1,22 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import CardsContainer from "../CardsContainer/CardsContainer";
 import s from "./Home.module.css";
-import WorldSVG from "../../svg/WorldSVG";
-import { Link } from "react-router-dom";
-function Home() {
+
+const Home = () => {
+	// .continents
+	// .name.common
+	// .flags[0]
+	const [list, setList] = useState([]);
+	useEffect(() => {
+		fetch("https://restcountries.com/v3/all")
+			.then(res => res.json())
+			.then(data => setList(data));
+	}, []);
 	return (
-		<div className={s.landing}>
-			<div>
-				<h1 className={s.title}>Let's find your country!</h1>
-				<button>
-					<Link to={"/"}>Main menu</Link>
-				</button>
-			</div>
-			<WorldSVG
-				circleColor={"#215bf0"}
-				lineColor={"#215bf0"}
-				countryColor={"#252939"}
-			/>
+		<div>
+			<CardsContainer list={list} />
 		</div>
 	);
-}
+};
 
 export default Home;
