@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Home from "../components/Home/Home.jsx";
 
 const HomePage = ({ handleActiveNav }) => {
