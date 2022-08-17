@@ -1,25 +1,40 @@
 import * as actions from "./action-types";
 
-export const getFlags = () => dispatch => {
-	return fetch("https://restcountries.com/v3/all")
-		.then(res => res.json())
-		.then(data =>
-			dispatch({
-				type: actions.GET_FLAGS,
-				payload: data,
-			})
-		);
+export const getFlags = () => async dispatch => {
+	dispatch(changeLoading(true));
+	try {
+		const req = await fetch("https://restcountries.com/v3/all");
+		const data = await req.json();
+		dispatch({
+			type: actions.GET_FLAGS,
+			payload: data,
+		});
+	} catch (error) {
+		dispatch(changeLoading(false));
+		console.log(error);
+	}
+	dispatch(changeLoading(false));
 };
 
 export const getDetails = flag_name => async dispatch => {
+	dispatch(changeLoading(true));
 	try {
-		const res = await fetch(`https://restcountries.com/v3/name/${flag_name}`);
-		const data = await res.json();
+		const req = await fetch(`https://restcountries.com/v3/name/${flag_name}`);
+		const data = await req.json();
 		dispatch({
 			type: actions.GET_FLAG_DETAILS,
 			payload: data[0],
 		});
 	} catch (error) {
+		dispatch(changeLoading(false));
 		console.log(error);
 	}
+	dispatch(changeLoading(false));
+};
+
+export const changeLoading = boolean => dispatch => {
+	dispatch({
+		type: actions.CHANGE_LOADING,
+		payload: boolean,
+	});
 };

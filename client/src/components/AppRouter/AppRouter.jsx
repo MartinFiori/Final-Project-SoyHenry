@@ -6,6 +6,7 @@ import NavBar from "../NavBar/NavBar";
 import DetailPage from "../../Pages/DetailPage";
 import { Provider } from "react-redux";
 import store from "../../Redux/store";
+import ActivityPage from "../../Pages/ActivityPage";
 
 const AppRouter = () => {
 	const [activeNav, setActiveNav] = useState(false);
@@ -16,11 +17,18 @@ const AppRouter = () => {
 		<Provider store={store}>
 			<BrowserRouter>
 				{activeNav && <NavBar />}
-				<Route exact path="/details/:id" component={DetailPage} />
+				<Route path="/details/:id">
+					<DetailPage handleActiveNav={handleActiveNav} />
+				</Route>
+				<Route path={"/addActivity"}>
+					<ActivityPage handleActiveNav={handleActiveNav} />
+				</Route>
 				<Route path="/home">
 					<HomePage handleActiveNav={handleActiveNav} />
 				</Route>
-				<Route exact path="/" component={LandingPage} />
+				<Route exact path="/">
+					<LandingPage handleActiveNav={handleActiveNav} />
+				</Route>
 			</BrowserRouter>
 		</Provider>
 	);

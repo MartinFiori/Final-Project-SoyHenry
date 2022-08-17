@@ -1,14 +1,78 @@
-.triangle {
+.detailContainer {
 	position: relative;
-	width: 300px;
-	height: 300px;
-	border-style: solid;
-	border-width: 300px 0 0 300px;
-	border-color: transparent transparent transparent #007bff;
+	width: 600px;
+	height: 700px;
+	border-radius: 20px;
+	overflow: hidden;
+	box-shadow: 0px 5px 5px 0px rgba(83, 85, 94, 0.492);
 }
-/* 
-.image {
+
+.bg__image {
+	width: 100%;
+	height: 250px;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+.info {
+	width: 100%;
 	position: absolute;
-	bottom: 0;
-	right: 0;
-} */
+	top: -10px;
+	height: 100%;
+	border-radius: 30px;
+	background: var(--white);
+	padding: 30px;
+	-webkit-box-shadow: inset 0px 5px 21px 0px rgba(83, 85, 94, 0.113);
+	-moz-box-shadow: inset 0px 5px 21px 0px rgba(83, 85, 94, 0.113);
+	box-shadow: inset 0px 5px 21px 0px rgba(83, 85, 94, 0.113);
+	transition: top 250ms ease-in-out;
+}
+
+.detailContainer:hover .info {
+	top: 170px;
+}
+
+.info > * {
+	margin-bottom: 25px;
+}
+
+.tg {
+	width: 100%;
+}
+
+.caption {
+	font-size: 24px;
+	margin-bottom: 15px;
+}
+
+.tg td {
+	font-size: 14px;
+	overflow: hidden;
+	padding: 10px 5px;
+	word-break: normal;
+	background: var(--dark-blue30);
+}
+.tg th {
+	font-size: 14px;
+	font-weight: normal;
+	overflow: hidden;
+	padding: 10px 5px;
+	word-break: normal;
+}
+
+.tg .tableData {
+	text-transform: capitalize;
+	border-color: inherit;
+	text-align: left;
+	vertical-align: top;
+}
+
+th {
+	background: var(--dark-blue);
+	color: var(--white);
+}
+
+.activitiesTitle {
+	font-size: 20px;
+	font-weight: normal;
+}

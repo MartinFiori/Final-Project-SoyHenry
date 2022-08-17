@@ -7,19 +7,13 @@ import Spinner from "../components/Spinner/Spinner.jsx";
 const HomePage = ({ handleActiveNav }) => {
 	const dispatch = useDispatch();
 	const flagsRedux = useSelector(state => state.allFlags);
+	const loading = useSelector(state => state.loading);
 	useEffect(() => {
 		handleActiveNav(true);
 		!flagsRedux.length && dispatch(getFlags());
-		return () => {
-			handleActiveNav(false);
-		};
 	}, [handleActiveNav, flagsRedux, dispatch]);
 
-	return (
-		<>
-			{!flagsRedux.length ? <Spinner /> : <CardsContainer list={flagsRedux} />}
-		</>
-	);
+	return <>{loading ? <Spinner /> : <CardsContainer list={flagsRedux} />}</>;
 };
 
 export default HomePage;

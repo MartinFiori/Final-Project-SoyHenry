@@ -4,6 +4,7 @@ const initialState = {
 	allFlags: [],
 	flagDetail: {},
 	actualPage: 1,
+	loading: false,
 	filters: {
 		continent: "",
 	},
@@ -28,6 +29,11 @@ function rootReducer(state = initialState, { type, payload }) {
 					...state.filters,
 					[payload.filterType]: payload.filter,
 				},
+			};
+		case actions.CHANGE_LOADING:
+			return {
+				...state,
+				loading: payload,
 			};
 		default:
 			return state;

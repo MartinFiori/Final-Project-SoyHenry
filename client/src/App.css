@@ -4,6 +4,7 @@
 :root {
 	--black: #0a0a0b;
 	--dark-blue: #252939;
+	--dark-blue30: rgba(37, 41, 57, 0.3);
 	--blue: #215bf0;
 	--blue-hover: #1d4dc8;
 	--white: #ffffff;

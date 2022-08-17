@@ -1,12 +1,15 @@
 import React from "react";
 import s from "./NavBar.module.css";
 import Button from "../Button/Button";
+import { Link } from "react-router-dom";
 
 const NavBar = () => {
 	return (
 		<header className={s.header}>
 			<nav>
-				<Button className={s.header__button} text="Create activity" />
+				<Link to={"/addActivity"}>
+					<Button className={s.header__button} text="Create activity" />
+				</Link>
 			</nav>
 		</header>
 	);
