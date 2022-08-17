@@ -7,6 +7,9 @@ const NavBar = () => {
 	return (
 		<header className={s.header}>
 			<nav>
+				<Link to="/home">
+					<Button text="Volver el menu boludito" />
+				</Link>
 				<Link to={"/addActivity"}>
 					<Button className={s.header__button} text="Create activity" />
 				</Link>

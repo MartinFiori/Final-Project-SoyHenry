@@ -1,9 +1,10 @@
 import React from "react";
+import ActivityContainer from "../components/ActivityContainer/ActivityContainer.jsx";
 
 const ActivityPage = () => {
 	return (
 		<div>
-			<h1 style={{ fontSize: "50px" }}>activity papito no fake</h1>
+			<ActivityContainer />
 		</div>
 	);
 };

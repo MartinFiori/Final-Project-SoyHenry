@@ -1,27 +1,18 @@
 import React from "react";
 import s from "./DetailContainer.module.css";
 
-const DetailContainer = ({
-	info: {
-		name: { common },
-		cca3,
-		continents,
-		capital,
-		subregion,
-		area,
-		population,
-		flags,
-	},
-}) => {
+const DetailContainer = props => {
+	const { info } = props;
+
 	return (
 		<div className={s.detailContainer}>
 			<div
 				className={s.bg__image}
-				style={{ backgroundImage: `url(${flags[0]})` }}
+				style={{ backgroundImage: `url(${info?.flags[0]})` }}
 			></div>
 			<div className={s.info}>
 				<table className={s.tg}>
-					<caption className={s.caption}>{common}</caption>
+					<caption className={s.caption}>{info?.name.common}</caption>
 					<tbody>
 						<tr>
 							<th className={s.tableData}>continents</th>
@@ -29,9 +20,9 @@ const DetailContainer = ({
 							<th className={s.tableData}>capital</th>
 						</tr>
 						<tr>
-							<td className={s.tableData}>{continents}</td>
-							<td className={s.tableData}>{cca3}</td>
-							<td className={s.tableData}>{capital}</td>
+							<td className={s.tableData}>{info?.continents}</td>
+							<td className={s.tableData}>{info?.cca3}</td>
+							<td className={s.tableData}>{info?.capital}</td>
 						</tr>
 						<tr>
 							<th className={s.tableData}>subregion</th>
@@ -39,9 +30,9 @@ const DetailContainer = ({
 							<th className={s.tableData}>population</th>
 						</tr>
 						<tr>
-							<td className={s.tableData}>{subregion}</td>
-							<td className={s.tableData}>{area}</td>
-							<td className={s.tableData}>{population}</td>
+							<td className={s.tableData}>{info?.subregion}</td>
+							<td className={s.tableData}>{info?.area}</td>
+							<td className={s.tableData}>{info?.population}</td>
 						</tr>
 					</tbody>
 				</table>

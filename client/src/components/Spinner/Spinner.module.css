@@ -1,3 +1,10 @@
+.spinnerContainer {
+	min-height: 80vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
 .spinner {
 	border: 5px solid rgba(0, 0, 0, 0.1);
 	width: 40px;

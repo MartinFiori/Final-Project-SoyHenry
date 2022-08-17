@@ -4,7 +4,7 @@ const initialState = {
 	allFlags: [],
 	flagDetail: {},
 	actualPage: 1,
-	loading: false,
+	loading: true,
 	filters: {
 		continent: "",
 	},
