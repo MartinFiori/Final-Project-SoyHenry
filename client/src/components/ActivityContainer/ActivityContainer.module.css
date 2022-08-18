@@ -1,0 +1,37 @@
+.form {
+	height: 400px;
+	width: 300px;
+	display: flex;
+	flex-direction: column;
+	padding: 2rem;
+	background-color: var(--dark-blue);
+	border-radius: 10px;
+}
+
+.form > h2,
+.form > label {
+	color: var(--white);
+}
+
+.title {
+	font-size: 18px;
+	text-align: center;
+	font-weight: normal;
+	margin-bottom: 1rem;
+}
+
+.select {
+	padding: 1rem;
+	margin-bottom: 15px;
+	border-radius: 4px;
+	font-size: 14px;
+	outline: none;
+}
+
+.select:focus {
+	outline: 2px solid var(--pink);
+}
+
+.option {
+	font-size: 14px;
+}

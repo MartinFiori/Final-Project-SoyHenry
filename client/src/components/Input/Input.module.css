@@ -1,0 +1,10 @@
+.input {
+	padding: 1rem;
+	margin-bottom: 15px;
+	border-radius: 5px;
+	font-size: 14px;
+}
+
+.input:focus {
+	outline: 2px solid var(--orange);
+}
