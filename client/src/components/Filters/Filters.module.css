@@ -1,0 +1,54 @@
+.filters {
+	width: fit-content;
+	margin: 2rem 100px 2rem auto;
+	background: var(--dark-blue30);
+	padding: 2rem;
+	border-radius: 10px;
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	grid-template-rows: repeat(3, 1fr);
+	grid-column-gap: 10px;
+	grid-row-gap: 0px;
+}
+
+.title {
+	grid-area: 1 / 1 / 2 / 3;
+	font-size: 16px;
+	margin-bottom: 1rem;
+	color: var(--dark-blue);
+}
+
+.labelCountry {
+	grid-area: 2 / 1 / 3 / 2;
+}
+
+.labelPopulation {
+	grid-area: 2 / 2 / 3 / 3;
+}
+
+.labelCountry,
+.labelPopulation {
+	font-size: 14px;
+	align-self: center;
+	/* background: red; */
+}
+
+.option,
+.select {
+	color: var(--dark-blue);
+	font-size: 12px;
+}
+
+.select {
+	border: 2px solid var(--dark-blue);
+	outline: none;
+	border-radius: 5px;
+}
+
+select:first-of-type {
+	grid-area: 3 / 1 / 4 / 2;
+}
+
+select:last-of-type {
+	grid-area: 3 / 2 / 4 / 3;
+}

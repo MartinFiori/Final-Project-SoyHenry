@@ -5,7 +5,7 @@ import { changeLoading } from "../../Redux/actions";
 import Button from "../Button/Button";
 import s from "./Card.module.css";
 
-const Card = ({ country, flags, continents, id }) => {
+const Card = ({ country, flags, continents, id, population }) => {
 	const dispatch = useDispatch();
 	return (
 		<div className={s.card}>

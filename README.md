@@ -95,8 +95,8 @@ A continuación se detallaran los requerimientos mínimos para la aprobación de
 
 #### Tecnologías necesarias
 
-- [ ] React
-- [ ] Redux
+- [✅] React
+- [✅] Redux
 - [ ] Express
 - [ ] Sequelize - Postgres
 
@@ -117,7 +117,7 @@ Se debe desarrollar una aplicación de React/Redux que contenga las siguientes p
   - Nombre
   - Continente
 - [ ] Botones/Opciones para filtrar por continente y por tipo de actividad turística
-- [ ] Botones/Opciones para ordenar tanto ascendentemente como descendentemente los países por orden alfabético y por cantidad de población
+- [✅] Botones/Opciones para ordenar tanto ascendentemente como descendentemente los países por orden alfabético y por cantidad de población
 - [ ] Paginado para ir buscando y mostrando los siguientes paises, 10 paises por pagina, mostrando los primeros 9 en la primer pagina.
 
 **Ruta de detalle de país**: debe contener
@@ -132,13 +132,13 @@ Se debe desarrollar una aplicación de React/Redux que contenga las siguientes p
 
 **Ruta de creación de actividad turística**: debe contener
 
-- [ ] Un formulario **controlado con JavaScript** con los siguientes campos:
+- [✅] Un formulario **controlado con JavaScript** con los siguientes campos:
   - Nombre
   - Dificultad
   - Duración
   - Temporada
 - [ ] Posibilidad de seleccionar/agregar varios países en simultáneo
-- [ ] Botón/Opción para crear una nueva actividad turística
+- [✅] Botón/Opción para crear una nueva actividad turística
 
 > Es requisito que el formulario de creación esté validado con JavaScript y no sólo con validaciones HTML. Pueden agregar las validaciones que consideren. Por ejemplo: Que el nombre de la actividad no pueda contener símbolos, que la duración no pueda exceder determinado valor, etc.
 

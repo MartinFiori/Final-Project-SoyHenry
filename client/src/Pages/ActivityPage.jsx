@@ -6,7 +6,7 @@ import { getFlags } from "../Redux/actions/index.js";
 
 const ActivityPage = ({ handleActiveNav }) => {
 	const dispatch = useDispatch();
-	const flagsRedux = useSelector(state => state.allFlags);
+	const flagsRedux = useSelector(state => state.countries);
 	const orderedNames = flagsRedux
 		.map(e => e.name.common)
 		.sort((a, b) => a.localeCompare(b));

@@ -8,6 +8,7 @@ const CardsContainer = ({ list }) => {
 			{list?.map(el => {
 				return (
 					<Card
+						population={el.population}
 						id={el.name.common}
 						key={el.name.common}
 						country={el.name.common}

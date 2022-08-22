@@ -6,7 +6,7 @@
 	grid-auto-rows: minmax(170px, auto);
 	grid-gap: 35px;
 	gap: 35px;
-	padding: 20px;
+	padding: 0 20px 20px;
 	grid-auto-flow: dense;
 	margin-bottom: 5rem;
 }

@@ -13,3 +13,7 @@
 .button:hover {
 	background: var(--blue-hover);
 }
+
+.formButton {
+	height: 44px;
+}

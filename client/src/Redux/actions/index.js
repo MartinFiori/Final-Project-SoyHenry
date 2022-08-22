@@ -32,6 +32,13 @@ export const getDetails = flag_name => async dispatch => {
 	dispatch(changeLoading(false));
 };
 
+export const setSort = sortType => dispatch => {
+	dispatch({
+		type: actions.SET_SORT,
+		payload: sortType,
+	});
+};
+
 export const changeLoading = boolean => dispatch => {
 	dispatch({
 		type: actions.CHANGE_LOADING,
