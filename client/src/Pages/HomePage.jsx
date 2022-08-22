@@ -3,6 +3,7 @@ import CardsContainer from "../components/CardsContainer/CardsContainer.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import { getFlags } from "../Redux/actions/";
 import Spinner from "../components/Spinner/Spinner.jsx";
+import Sorts from "../components/Sorts/Sorts.jsx";
 import Filters from "../components/Filters/Filters.jsx";
 
 const HomePage = ({ handleActiveNav }) => {
@@ -21,10 +22,11 @@ const HomePage = ({ handleActiveNav }) => {
 			{loading ? (
 				<Spinner />
 			) : (
-				<div>
+				<>
 					<Filters />
+					<Sorts />
 					<CardsContainer list={countriesRedux} />
-				</div>
+				</>
 			)}
 		</>
 	);

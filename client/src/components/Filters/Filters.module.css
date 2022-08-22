@@ -1,54 +1,55 @@
-.filters {
-	width: fit-content;
-	margin: 2rem 100px 2rem auto;
-	background: var(--dark-blue30);
-	padding: 2rem;
-	border-radius: 10px;
-	display: grid;
-	grid-template-columns: repeat(2, 1fr);
-	grid-template-rows: repeat(3, 1fr);
-	grid-column-gap: 10px;
-	grid-row-gap: 0px;
+.filterContainer {
+	width: 200px;
+}
+.radio {
+	display: none;
 }
 
 .title {
-	grid-area: 1 / 1 / 2 / 3;
 	font-size: 16px;
-	margin-bottom: 1rem;
-	color: var(--dark-blue);
+	text-transform: capitalize;
 }
 
-.labelCountry {
-	grid-area: 2 / 1 / 3 / 2;
+.filter {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	gap: 10px;
 }
 
-.labelPopulation {
-	grid-area: 2 / 2 / 3 / 3;
+.filterContent {
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: row;
 }
 
-.labelCountry,
-.labelPopulation {
-	font-size: 14px;
-	align-self: center;
-	/* background: red; */
-}
-
-.option,
-.select {
-	color: var(--dark-blue);
+.label,
+.resetFilters {
 	font-size: 12px;
-}
-
-.select {
-	border: 2px solid var(--dark-blue);
-	outline: none;
+	padding: 0.4rem;
+	margin: 1rem;
+	text-transform: capitalize;
+	border: 2px solid var(--blue);
+	color: var(--blue);
 	border-radius: 5px;
+	font-weight: bold;
+	cursor: pointer;
+	transition: all 250ms ease;
 }
 
-select:first-of-type {
-	grid-area: 3 / 1 / 4 / 2;
+.resetFilters {
+	border: 2px solid var(--pink);
+	background: var(--pink);
+	color: var(--white);
 }
 
-select:last-of-type {
-	grid-area: 3 / 2 / 4 / 3;
+.resetFilters:hover {
+	background: var(--pink);
+	color: var(--white);
+}
+
+.active {
+	background: var(--blue);
+	color: var(--white);
 }
