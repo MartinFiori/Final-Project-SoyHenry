@@ -1,11 +1,13 @@
 .filterContainer {
 	width: 200px;
 }
+
 .radio {
 	display: none;
 }
 
 .title {
+	color: var(--dark-blue);
 	font-size: 16px;
 	text-transform: capitalize;
 }
@@ -27,8 +29,8 @@
 .label,
 .resetFilters {
 	font-size: 12px;
-	padding: 0.4rem;
-	margin: 1rem;
+	padding: 0.6rem;
+	margin: 0.4rem;
 	text-transform: capitalize;
 	border: 2px solid var(--blue);
 	color: var(--blue);
@@ -38,18 +40,26 @@
 	transition: all 250ms ease;
 }
 
+.label:hover {
+	background: var(--blue-hover10);
+}
+
 .resetFilters {
 	border: 2px solid var(--pink);
 	background: var(--pink);
 	color: var(--white);
+	transition: background 250ms ease;
 }
 
 .resetFilters:hover {
-	background: var(--pink);
-	color: var(--white);
+	background: var(--pink-hover);
 }
 
 .active {
 	background: var(--blue);
 	color: var(--white);
+}
+
+.active:hover {
+	background: var(--blue-hover);
 }

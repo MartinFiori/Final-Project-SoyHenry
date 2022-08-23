@@ -22,7 +22,7 @@ const ActivityContainer = () => {
 					<div>
 						<Label text="Difficulty:" />
 						<select name="difficulty" className={s.select}>
-							<option value={"default"} className={s.option} disabled>
+							<option hidden value={"default"} className={s.option} disabled>
 								Choose a difficulty
 							</option>
 							{difficulties.map((el, i) => (
@@ -40,7 +40,7 @@ const ActivityContainer = () => {
 							className={s.select}
 							defaultValue={"default"}
 						>
-							<option value={"default"} className={s.option} disabled>
+							<option hidden value={"default"} className={s.option} disabled>
 								Choose a season
 							</option>
 							{seasons.map(el => (
@@ -60,7 +60,7 @@ const ActivityContainer = () => {
 					className={s.select}
 					defaultValue={"default"}
 				>
-					<option value={"default"} className={s.option} disabled>
+					<option hidden value={"default"} className={s.option} disabled>
 						Choose an option
 					</option>
 					{countries.map(el => (

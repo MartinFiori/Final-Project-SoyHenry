@@ -1,18 +1,21 @@
 import React, { useState, useEffect } from "react";
 import s from "./Filters.module.css";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setFilters } from "../../Redux/actions";
 
 const Filters = () => {
+	const dispatch = useDispatch();
+	const filtersRedux = useSelector(state => state.filters);
 	const countries = useSelector(state => state.countries);
 	const [continents, setContinents] = useState([]);
-	const [activeFilter, setActiveFilter] = useState({});
+	const [activeFilter, setActiveFilter] = useState(filtersRedux);
 	const filters = [
 		{ name: "continents", filterTypes: continents },
 		{ name: "activities", filterTypes: ["caminar", "comer", "pasear"] },
 		{ name: "comidas", filterTypes: ["pancho", "empanadas", "pizza"] },
 	];
 	const handleSetFilter = (filterType, value) => {
-		console.log(filterType, value);
+		dispatch(setFilters({ [filterType]: value }));
 		setActiveFilter({
 			...activeFilter,
 			[filterType]: value,
@@ -23,6 +26,7 @@ const Filters = () => {
 		!continents.length &&
 			setContinents([...new Set(countries.map(el => el.continents[0]))]);
 	}, [countries, continents]);
+
 	return (
 		<form className={s.filterContainer} onSubmit={e => e.preventDefault()}>
 			{filters?.map(filter => (
@@ -36,7 +40,7 @@ const Filters = () => {
 								name={type}
 								value={type}
 								className={`${s.label} ${
-									activeFilter[filter.name] === type ? `${s.active}` : ""
+									activeFilter[filter.name] === type && `${s.active}`
 								}`}
 								key={type}
 							>

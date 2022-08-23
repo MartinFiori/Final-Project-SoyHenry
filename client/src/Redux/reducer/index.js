@@ -6,6 +6,7 @@ const initialState = {
 	actualPage: 1,
 	loading: true,
 	sortby: "",
+	filters: {},
 	pagination: {
 		actualPage: 1,
 		countriesPerPage: 0,
@@ -24,18 +25,23 @@ function rootReducer(state = initialState, { type, payload }) {
 				...state,
 				flagDetail: payload,
 			};
-		case actions.SET_FILTERS:
-			return {
-				...state,
-				filters: {
-					...state.filters,
-					[payload.filterType]: payload.filter,
-				},
-			};
 		case actions.CHANGE_LOADING:
 			return {
 				...state,
 				loading: payload,
+			};
+		case actions.SET_FILTERS:
+			let arr = state.countries.filter(
+				el => Object.values(payload)[0] === el.continents[0]
+			);
+			console.log(arr);
+			return {
+				...state,
+
+				filters: {
+					...state.filters,
+					...payload,
+				},
 			};
 		case actions.SET_SORT:
 			const sortedCountries =

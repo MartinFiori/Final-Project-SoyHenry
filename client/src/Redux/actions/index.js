@@ -39,6 +39,13 @@ export const setSort = sortType => dispatch => {
 	});
 };
 
+export const setFilters = filters => dispatch => {
+	dispatch({
+		type: actions.SET_FILTERS,
+		payload: filters,
+	});
+};
+
 export const changeLoading = boolean => dispatch => {
 	dispatch({
 		type: actions.CHANGE_LOADING,
