@@ -2,6 +2,7 @@ import * as actions from "../actions/action-types.js";
 
 const initialState = {
 	countries: [],
+	countriesFiltered: [],
 	flagDetail: {},
 	actualPage: 1,
 	loading: true,
@@ -37,7 +38,7 @@ function rootReducer(state = initialState, { type, payload }) {
 			console.log(arr);
 			return {
 				...state,
-
+				countriesFiltered: arr,
 				filters: {
 					...state.filters,
 					...payload,
@@ -56,10 +57,29 @@ function rootReducer(state = initialState, { type, payload }) {
 					: payload === "POPULATION_ASC"
 					? state.countries.sort((a, b) => b.population - a.population)
 					: state.countries.sort((a, b) => a.population - b.population);
+			const sortedFiltered =
+				payload === "COUNTRY_ASC"
+					? state.countriesFiltered.sort((a, b) =>
+							a.name.common.localeCompare(b.name.common)
+					  )
+					: payload === "COUNTRY_DESC"
+					? state.countriesFiltered.sort((a, b) =>
+							b.name.common.localeCompare(a.name.common)
+					  )
+					: payload === "POPULATION_ASC"
+					? state.countriesFiltered.sort((a, b) => b.population - a.population)
+					: state.countriesFiltered.sort((a, b) => a.population - b.population);
 			return {
 				...state,
 				sortby: payload,
 				countries: sortedCountries,
+				countriesFiltered: sortedFiltered,
+			};
+		case actions.CLEAR_FILTERS:
+			return {
+				...state,
+				countriesFiltered: payload,
+				filters: {},
 			};
 		default:
 			return state;

@@ -52,3 +52,10 @@ export const changeLoading = boolean => dispatch => {
 		payload: boolean,
 	});
 };
+
+export const clearFilters = () => dispatch => {
+	dispatch({
+		type: actions.CLEAR_FILTERS,
+		payload: [],
+	});
+};

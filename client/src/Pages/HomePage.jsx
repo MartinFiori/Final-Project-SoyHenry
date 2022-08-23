@@ -9,6 +9,7 @@ import Filters from "../components/Filters/Filters.jsx";
 const HomePage = ({ handleActiveNav }) => {
 	const dispatch = useDispatch();
 	const countriesRedux = useSelector(state => state.countries);
+	const filteredRedux = useSelector(state => state.countriesFiltered);
 	const sortby = useSelector(state => state.sortby);
 	const loading = useSelector(state => state.loading);
 
@@ -25,7 +26,9 @@ const HomePage = ({ handleActiveNav }) => {
 				<>
 					<Filters />
 					<Sorts />
-					<CardsContainer list={countriesRedux} />
+					<CardsContainer
+						list={!filteredRedux.length ? countriesRedux : filteredRedux}
+					/>
 				</>
 			)}
 		</>

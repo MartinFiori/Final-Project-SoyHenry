@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import s from "./ActivityContainer.module.css";
 import Input from "../Input/Input";
 import Label from "../Label/Label";
@@ -9,6 +9,7 @@ import { useSelector } from "react-redux";
 
 const ActivityContainer = () => {
 	const countries = useSelector(state => state.countries);
+	const [data, setData] = useState({});
 	const difficulties = ["one", "two", "three", "four", "five"];
 	const seasons = ["Summer", "Spring", "Winter", "Autumn"];
 	return (

@@ -9,6 +9,8 @@ const Card = ({ country, flags, continents, id, population }) => {
 	const dispatch = useDispatch();
 	return (
 		<div className={s.card}>
+			<h1 style={{ fontSize: "25px" }}>{population}</h1>
+			<h1 style={{ fontSize: "25px" }}>{country}</h1>
 			<img className={s.card__image} src={flags} alt={country} />
 			<div className={s.bg__info}></div>
 			<div className={s.card__info}>
