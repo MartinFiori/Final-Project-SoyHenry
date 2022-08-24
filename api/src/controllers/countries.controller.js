@@ -10,7 +10,7 @@ const getAPICountries = async () => {
 			name: el.name.common,
 			img: el.flags[0],
 			continents: el.continents[0],
-			capital: el.capital,
+			capital: el.capital ? el.capital : "No Capital Found",
 			subregion: el.subregion,
 			area: el.area,
 			population: el.population,

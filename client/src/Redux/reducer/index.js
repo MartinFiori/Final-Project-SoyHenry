@@ -4,7 +4,7 @@ const initialState = {
 	countries: [],
 	countriesFiltered: [],
 	flagDetail: {},
-	actualPage: 1,
+	continents: [],
 	loading: true,
 	sortby: "",
 	filters: {},
@@ -96,6 +96,14 @@ function rootReducer(state = initialState, { type, payload }) {
 					...state.pagination,
 					actualPage: payload,
 				},
+			};
+		case actions.GET_CONTINENTS:
+			return {
+				...state,
+				continents: [
+					"Todos",
+					...new Set(state.countries.map(el => el.continents[0])),
+				],
 			};
 		default:
 			return state;

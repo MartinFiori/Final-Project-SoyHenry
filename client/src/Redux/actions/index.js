@@ -39,6 +39,12 @@ export const setSort = sortType => dispatch => {
 	});
 };
 
+export const getContinents = () => dispatch => {
+	dispatch({
+		type: actions.GET_CONTINENTS,
+	});
+};
+
 export const setFilters = filters => dispatch => {
 	dispatch({
 		type: actions.SET_FILTERS,

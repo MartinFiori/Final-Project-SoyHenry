@@ -7,3 +7,4 @@ export const SET_PAGINATION = "SET_PAGINATION";
 export const SET_ACTUAL_PAGE = "SET_ACTUAL_PAGE";
 export const CLEAR_FILTERS = "CLEAR_FILTERS";
 export const RESET_PAGE = "RESET_PAGE";
+export const GET_CONTINENTS = "GET_CONTINENTS";

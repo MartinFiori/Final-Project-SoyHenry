@@ -29,7 +29,10 @@ const Filters = () => {
 	};
 	useEffect(() => {
 		!continents.length &&
-			setContinents([...new Set(countries.map(el => el.continents[0]))]);
+			setContinents([
+				"Todos",
+				...new Set(countries.map(el => el.continents[0])),
+			]);
 	}, [countries, continents]);
 
 	return (
