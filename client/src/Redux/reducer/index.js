@@ -10,7 +10,7 @@ const initialState = {
 	filters: {},
 	pagination: {
 		actualPage: 1,
-		countriesPerPage: 0,
+		countriesPerPage: 9,
 	},
 };
 
@@ -35,7 +35,6 @@ function rootReducer(state = initialState, { type, payload }) {
 			let arr = state.countries.filter(
 				el => Object.values(payload)[0] === el.continents[0]
 			);
-			console.log(arr);
 			return {
 				...state,
 				countriesFiltered: arr,
@@ -80,6 +79,23 @@ function rootReducer(state = initialState, { type, payload }) {
 				...state,
 				countriesFiltered: payload,
 				filters: {},
+			};
+		case actions.SET_ACTUAL_PAGE:
+			return {
+				...state,
+				pagination: {
+					...state.pagination,
+					actualPage: payload.pageNumber,
+					countriesPerPage: payload.quantity,
+				},
+			};
+		case actions.RESET_PAGE:
+			return {
+				...state,
+				pagination: {
+					...state.pagination,
+					actualPage: payload,
+				},
 			};
 		default:
 			return state;

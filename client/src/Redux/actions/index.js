@@ -53,9 +53,26 @@ export const changeLoading = boolean => dispatch => {
 	});
 };
 
+export const setActualPage = (num, countriesPerPage) => dispatch => {
+	dispatch({
+		type: actions.SET_ACTUAL_PAGE,
+		payload: {
+			pageNumber: num,
+			quantity: countriesPerPage,
+		},
+	});
+};
+
 export const clearFilters = () => dispatch => {
 	dispatch({
 		type: actions.CLEAR_FILTERS,
 		payload: [],
+	});
+};
+
+export const resetPageFilter = () => dispatch => {
+	dispatch({
+		type: actions.RESET_PAGE,
+		payload: 1,
 	});
 };

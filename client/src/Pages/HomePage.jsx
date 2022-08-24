@@ -24,6 +24,9 @@ const HomePage = ({ handleActiveNav }) => {
 				<Spinner />
 			) : (
 				<>
+					<button onClick={() => console.log(countriesRedux.length)}>
+						asdf
+					</button>
 					<Filters />
 					<Sorts />
 					<CardsContainer

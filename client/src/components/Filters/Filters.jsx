@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import s from "./Filters.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { clearFilters, setFilters } from "../../Redux/actions";
+import { clearFilters, resetPageFilter, setFilters } from "../../Redux/actions";
 
 const Filters = () => {
 	const dispatch = useDispatch();
@@ -12,6 +12,7 @@ const Filters = () => {
 	const filters = [
 		{ name: "continents", filterTypes: continents },
 		// { name: "activities", filterTypes: ["caminar", "comer", "pasear"] },
+		// { name: "comidas", filterTypes: ["pancho", "manteca", "pizza"] },
 	];
 	const handleSetFilter = (filterType, value) => {
 		dispatch(setFilters({ [filterType]: value }));
@@ -19,6 +20,7 @@ const Filters = () => {
 			...activeFilter,
 			[filterType]: value,
 		});
+		dispatch(resetPageFilter());
 	};
 
 	const handleResetFilters = () => {
