@@ -14,7 +14,7 @@ const Sorts = () => {
 			<label className={s.labelCountry}>Country:</label>
 			<select
 				className={s.select}
-				defaultValue="defaultCountry"
+				// defaultValue="defaultCountry"
 				onChange={e => handleSort(e.target.value)}
 			>
 				<option className={s.option} value="defaultCountry" disabled>

@@ -38,6 +38,10 @@ function rootReducer(state = initialState, { type, payload }) {
 			return {
 				...state,
 				countriesFiltered: arr,
+				pagination: {
+					...state.pagination,
+					actualPage: 1,
+				},
 				filters: {
 					...state.filters,
 					...payload,

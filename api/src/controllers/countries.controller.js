@@ -11,7 +11,7 @@ const getAPICountries = async () => {
 			img: el.flags[0],
 			continents: el.continents[0],
 			capital: el.capital ? el.capital : "No Capital Found",
-			subregion: el.subregion,
+			subregion: el.subregion ? el.subregion : el.continents[0],
 			area: el.area,
 			population: el.population,
 		};
@@ -40,6 +40,39 @@ const getAllCountries = async () => {
 	}
 };
 
+const countDB = async () => {
+	try {
+		const apiCountries = await getAllCountries();
+		apiCountries.forEach(el => {
+			Country.findOrCreate({
+				where: {
+					id: el.id,
+					name: el.name,
+					img: el.img,
+					continents: el.continents,
+					capital: el.capital,
+					subregion: el.subregion,
+					area: el.area,
+					population: el.population,
+				},
+			});
+		});
+		const allCountries = await Country.findAll();
+		return allCountries;
+	} catch (error) {
+		console.log(error);
+	}
+};
+
+// const findCountryWithAct = async country_id => {
+// 	try {
+// 		const find
+// 	} catch (error) {
+// 		console.log(error);
+// 	}
+// };
+
 module.exports = {
 	getAllCountries,
+	countDB,
 };
