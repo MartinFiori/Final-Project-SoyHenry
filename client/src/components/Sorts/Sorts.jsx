@@ -1,12 +1,13 @@
 import React from "react";
 import s from "./Sorts.module.css";
 import { setSort } from "../../Redux/actions";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const Sorts = () => {
 	const dispatch = useDispatch();
+	const flags = useSelector(state => state.countries);
 	const handleSort = value => {
-		dispatch(setSort(value));
+		dispatch(setSort(value, flags));
 	};
 	return (
 		<section className={s.sorts}>
@@ -14,7 +15,7 @@ const Sorts = () => {
 			<label className={s.labelCountry}>Country:</label>
 			<select
 				className={s.select}
-				// defaultValue="defaultCountry"
+				defaultValue="defaultCountry"
 				onChange={e => handleSort(e.target.value)}
 			>
 				<option className={s.option} value="defaultCountry" disabled>

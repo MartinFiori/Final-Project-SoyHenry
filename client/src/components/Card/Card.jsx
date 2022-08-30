@@ -5,7 +5,7 @@ import { changeLoading } from "../../Redux/actions";
 import Button from "../Button/Button";
 import s from "./Card.module.css";
 
-const Card = ({ country, flags, continents, id, population }) => {
+const Card = ({ country, flags, continent, id, population }) => {
 	const dispatch = useDispatch();
 	return (
 		<div className={s.card}>
@@ -15,7 +15,7 @@ const Card = ({ country, flags, continents, id, population }) => {
 			<div className={s.bg__info}></div>
 			<div className={s.card__info}>
 				<p className={s.title}> {country}</p>
-				<p className={s.continents}> {continents}</p>
+				<p className={s.continents}> {continent}</p>
 				<Link
 					to={`/details/${id}`}
 					onClick={() => dispatch(changeLoading(true))}

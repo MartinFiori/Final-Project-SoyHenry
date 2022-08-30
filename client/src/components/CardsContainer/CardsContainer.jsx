@@ -41,11 +41,11 @@ const CardsContainer = ({ list }) => {
 					return (
 						<Card
 							population={el.population}
-							id={el.name.common}
-							key={el.name.common}
-							country={el.name.common}
-							flags={el.flags[0]}
-							continents={el.continents}
+							id={el.id}
+							key={el.id}
+							country={el.name}
+							flags={el.flag}
+							continents={el.continent}
 						/>
 					);
 				})}

@@ -177,7 +177,7 @@ Se debe desarrollar un servidor en Node/Express con las siguientes rutas:
   - Obtener el detalle de un país en particular
   - Debe traer solo los datos pedidos en la ruta de detalle de país
   - Incluir los datos de las actividades turísticas correspondientes
-- [ ] **GET /countries?name="..."**:
+- [✅] **GET /countries?name="..."**:
   - Obtener los países que coincidan con el nombre pasado como query parameter (No necesariamente tiene que ser una matcheo exacto)
   - Si no existe ningún país mostrar un mensaje adecuado
 - [ ] **POST /activities**:

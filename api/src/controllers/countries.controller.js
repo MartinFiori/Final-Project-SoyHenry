@@ -4,75 +4,97 @@ const { Activity, Country } = require("../db.js");
 
 const getAPICountries = async () => {
 	const apiUrl = await axios.get("https://restcountries.com/v3/all");
-	const apiInfo = await apiUrl.data.map(el => {
+
+	const apiInfo = await apiUrl.data.map(e => {
 		return {
-			id: el.cca3,
-			name: el.name.common,
-			img: el.flags[0],
-			continents: el.continents[0],
-			capital: el.capital ? el.capital : "No Capital Found",
-			subregion: el.subregion ? el.subregion : el.continents[0],
-			area: el.area,
-			population: el.population,
+			id: e.cca3.toLowerCase(),
+			name: e.name.common,
+			img: e.flags[0],
+			continent: e.continents[0],
+			capital: e.capital ? e.capital[0] : "No tiene capital",
+			subregion: e.subregion ? e.subregion : e.continents[0],
+			area: e.area,
+			population: e.population,
 		};
 	});
 	return apiInfo;
 };
 
-const getDBinfo = async () => {
-	return await Country.findAll({
-		include: Activity,
-		atributes: ["name", "difficulty", "duration", "season"],
-		through: {
-			atributes: [],
-		},
-	});
-};
-
-const getAllCountries = async () => {
-	try {
-		const apiData = await getAPICountries();
-		const dbData = await getDBinfo();
-		const allData = apiData.concat(dbData);
-		return await allData;
-	} catch (error) {
-		console.log(error);
-	}
+const activityDB = async () => {
+	const act = await Activity.findAll();
+	return act;
 };
 
 const countDB = async () => {
 	try {
-		const apiCountries = await getAllCountries();
-		apiCountries.forEach(el => {
+		let info = await getAPICountries();
+		info.forEach(e => {
 			Country.findOrCreate({
 				where: {
-					id: el.id,
-					name: el.name,
-					img: el.img,
-					continents: el.continents,
-					capital: el.capital,
-					subregion: el.subregion,
-					area: el.area,
-					population: el.population,
+					id: e.id,
+					name: e.name,
+					flag: e.img,
+					continent: e.continent,
+					capital: e.capital,
+					subregion: e.subregion,
+					area: e.area,
+					population: e.population,
 				},
 			});
 		});
-		const allCountries = await Country.findAll();
-		return allCountries;
+		const country = await Country.findAll();
+		return country;
 	} catch (error) {
-		console.log(error);
+		res.status(404).send(error);
 	}
 };
 
-// const findCountryWithAct = async country_id => {
+module.exports = {
+	countDB,
+	activityDB,
+};
+
+// const getDBinfo = async () => {
+// 	return await Country.findAll({
+// 		include: Activity,
+// 		atributes: ["name", "difficulty", "duration", "season"],
+// 		through: {
+// 			atributes: [],
+// 		},
+// 	});
+// };
+
+// const getAllCountries = async () => {
 // 	try {
-// 		const find
+// 		const apiData = await getAPICountries();
+// 		const dbData = await getDBinfo();
+// 		const allData = apiData.concat(dbData);
+// 		return await allData;
 // 	} catch (error) {
 // 		console.log(error);
 // 	}
 // };
 
-module.exports = {
-	getAllCountries,
-	countDB,
-};
+// const countDB = async () => {
+// 	try {
+// 		const apiCountries = await getAllCountries();
+// 		apiCountries.forEach(el => {
+// 			Country.findOrCreate({
+// 				where: {
+// 					id: el.id,
+// 					name: el.name,
+// 					img: el.img,
+// 					continents: el.continents,
+// 					capital: el.capital,
+// 					subregion: el.subregion,
+// 					area: el.area,
+// 					population: el.population,
+// 				},
+// 			});
+// 		});
+// 		const allCountries = await Country.findAll();
+// 		return allCountries;
+// 	} catch (error) {
+// 		console.log(error);
+// 	}
+// };

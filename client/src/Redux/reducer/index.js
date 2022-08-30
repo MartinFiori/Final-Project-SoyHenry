@@ -33,7 +33,7 @@ function rootReducer(state = initialState, { type, payload }) {
 			};
 		case actions.SET_FILTERS:
 			let arr = state.countries.filter(
-				el => Object.values(payload)[0] === el.continents[0]
+				el => payload.continents === el.continent
 			);
 			return {
 				...state,
@@ -50,25 +50,17 @@ function rootReducer(state = initialState, { type, payload }) {
 		case actions.SET_SORT:
 			const sortedCountries =
 				payload === "COUNTRY_ASC"
-					? state.countries.sort((a, b) =>
-							a.name.common.localeCompare(b.name.common)
-					  )
+					? state.countries.sort((a, b) => a.name.localeCompare(b.name))
 					: payload === "COUNTRY_DESC"
-					? state.countries.sort((a, b) =>
-							b.name.common.localeCompare(a.name.common)
-					  )
+					? state.countries.sort((a, b) => b.name.localeCompare(a.name))
 					: payload === "POPULATION_ASC"
 					? state.countries.sort((a, b) => b.population - a.population)
 					: state.countries.sort((a, b) => a.population - b.population);
 			const sortedFiltered =
 				payload === "COUNTRY_ASC"
-					? state.countriesFiltered.sort((a, b) =>
-							a.name.common.localeCompare(b.name.common)
-					  )
+					? state.countriesFiltered.sort((a, b) => a.name.localeCompare(b.name))
 					: payload === "COUNTRY_DESC"
-					? state.countriesFiltered.sort((a, b) =>
-							b.name.common.localeCompare(a.name.common)
-					  )
+					? state.countriesFiltered.sort((a, b) => b.name.localeCompare(a.name))
 					: payload === "POPULATION_ASC"
 					? state.countriesFiltered.sort((a, b) => b.population - a.population)
 					: state.countriesFiltered.sort((a, b) => a.population - b.population);
@@ -77,6 +69,10 @@ function rootReducer(state = initialState, { type, payload }) {
 				sortby: payload,
 				countries: sortedCountries,
 				countriesFiltered: sortedFiltered,
+				pagination: {
+					...state.pagination,
+					actualPage: 1,
+				},
 			};
 		case actions.CLEAR_FILTERS:
 			return {
@@ -93,20 +89,20 @@ function rootReducer(state = initialState, { type, payload }) {
 					countriesPerPage: payload.quantity,
 				},
 			};
-		case actions.RESET_PAGE:
-			return {
-				...state,
-				pagination: {
-					...state.pagination,
-					actualPage: payload,
-				},
-			};
+		// case actions.RESET_PAGE:
+		// 	return {
+		// 		...state,
+		// 		pagination: {
+		// 			...state.pagination,
+		// 			actualPage: payload,
+		// 		},
+		// 	};
 		case actions.GET_CONTINENTS:
 			return {
 				...state,
 				continents: [
 					"Todos",
-					...new Set(state.countries.map(el => el.continents[0])),
+					...new Set(state.countries.map(el => el.continent)),
 				],
 			};
 		default:

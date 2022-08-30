@@ -1,28 +1,50 @@
-// import React, { useState } from "react";
+import React, { useState } from "react";
 import s from "./ActivityContainer.module.css";
 import Input from "../Input/Input";
 import Label from "../Label/Label";
 import Walking from "../../svg/Walking";
 import Button from "../Button/Button.jsx";
 import { useSelector } from "react-redux";
-// import { validation } from "../../helpers/validation.js";
+import { validation } from "../../helpers/validation.js";
 
 const ActivityContainer = () => {
 	const countries = useSelector(state => state.countries);
-	// const [data, setData] = useState({});
+	const [data, setData] = useState({});
 	const difficulties = ["one", "two", "three", "four", "five"];
 	const seasons = ["Summer", "Spring", "Winter", "Autumn"];
+	const [error, setError] = useState({});
+	const handleInputsChange = e => {
+		setData(prev => ({
+			...prev,
+			[e.target.name]: e.target.value,
+		}));
+		setError({
+			...data,
+			[e.target.name]: e.target.value,
+		});
+	};
 	return (
 		<div className={s.formContainer}>
 			<Walking className={s.walking} />
-			<form method="POST" className={s.form}>
+			<form method="POST" className={s.form} onSubmit={e => e.preventDefault()}>
+				<button onClick={() => console.log("data: ", data)}>data</button>
+				<button onClick={() => console.log("error: ", error)}>error</button>
 				<h2 className={s.title}>Create Activity</h2>
 				<Label text="Name:" />
-				<Input type="text" name="name" />
+				{/* <Input type="text" name="name" onChange={e => console.log(e)} /> */}
+				<input
+					type="text"
+					name="name"
+					onChange={e => console.log(e.target.value)}
+				/>
 				<section className={s.selectContainer}>
 					<div>
 						<Label text="Difficulty:" />
-						<select name="difficulty" className={s.select}>
+						<select
+							name="difficulty"
+							className={s.select}
+							onChange={e => handleInputsChange(e)}
+						>
 							<option hidden value={"default"} className={s.option} disabled>
 								Choose a difficulty
 							</option>
@@ -40,6 +62,7 @@ const ActivityContainer = () => {
 							name="season"
 							className={s.select}
 							defaultValue={"default"}
+							onChange={e => handleInputsChange(e)}
 						>
 							<option hidden value={"default"} className={s.option} disabled>
 								Choose a season
@@ -53,13 +76,18 @@ const ActivityContainer = () => {
 					</div>
 				</section>
 				<Label text="Duration: (in minutes)" />
-				<Input type="number" name="duration" />
+				<Input
+					type="number"
+					name="duration"
+					onChange={e => handleInputsChange(e)}
+				/>
 				<Label text="Countries:" />
 				<select
 					name="countries"
 					id=""
 					className={s.select}
 					defaultValue={"default"}
+					onChange={e => handleInputsChange(e)}
 				>
 					<option hidden value={"default"} className={s.option} disabled>
 						Choose an option

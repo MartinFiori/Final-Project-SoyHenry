@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import s from "./Filters.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { clearFilters, resetPageFilter, setFilters } from "../../Redux/actions";
+import { clearFilters, setFilters } from "../../Redux/actions";
 
 const Filters = () => {
 	const dispatch = useDispatch();
@@ -20,19 +20,16 @@ const Filters = () => {
 			...activeFilter,
 			[filterType]: value,
 		});
-		dispatch(resetPageFilter());
 	};
 
 	const handleResetFilters = () => {
 		setActiveFilter({});
 		dispatch(clearFilters());
 	};
+
 	useEffect(() => {
 		!continents.length &&
-			setContinents([
-				"Todos",
-				...new Set(countries.map(el => el.continents[0])),
-			]);
+			setContinents(["Todos", ...new Set(countries.map(el => el.continent))]);
 	}, [countries, continents]);
 
 	return (
