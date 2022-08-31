@@ -11,11 +11,11 @@ const Filters = () => {
 	const [activeFilter, setActiveFilter] = useState(filtersRedux);
 	const filters = [
 		{ name: "continents", filterTypes: continents },
-		// { name: "activities", filterTypes: ["caminar", "comer", "pasear"] },
-		// { name: "comidas", filterTypes: ["pancho", "manteca", "pizza"] },
+		{ name: "activities", filterTypes: ["caminar", "comer", "pasear"] },
+		{ name: "comidas", filterTypes: ["pancho", "manteca", "pizza"] },
 	];
 	const handleSetFilter = (filterType, value) => {
-		dispatch(setFilters({ [filterType]: value }));
+		dispatch(setFilters({ [filterType]: value }, countries));
 		setActiveFilter({
 			...activeFilter,
 			[filterType]: value,

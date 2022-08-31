@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import CardsContainer from "../components/CardsContainer/CardsContainer.jsx";
 import { useDispatch, useSelector } from "react-redux";
-import { getContinents, getFlags } from "../Redux/actions/";
+import { getFlags } from "../Redux/actions/";
 import Spinner from "../components/Spinner/Spinner.jsx";
 import Sorts from "../components/Sorts/Sorts.jsx";
 import Filters from "../components/Filters/Filters.jsx";
@@ -17,7 +17,6 @@ const HomePage = ({ handleActiveNav }) => {
 	useEffect(() => {
 		handleActiveNav(true);
 		!countriesRedux.length && dispatch(getFlags());
-		countriesRedux.length && !continents.length && dispatch(getContinents());
 	}, [dispatch, handleActiveNav, countriesRedux, sortby, continents]);
 
 	return (
@@ -28,9 +27,7 @@ const HomePage = ({ handleActiveNav }) => {
 				<>
 					<Filters />
 					<Sorts />
-					<CardsContainer
-						list={!filteredRedux.length ? countriesRedux : filteredRedux}
-					/>
+					<CardsContainer list={filteredRedux} />
 				</>
 			)}
 		</>

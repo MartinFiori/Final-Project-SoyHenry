@@ -30,7 +30,7 @@ const CardsContainer = ({ list }) => {
 						key={page}
 						style={{ fontSize: "30px", cursor: "pointer" }}
 						className={`${actualPage === page && s.active}`}
-						onClick={() => dispatch(setActualPage(page, page === 1 ? 9 : 10))}
+						onClick={() => dispatch(setActualPage(page, countriesPerPage))}
 					>
 						{page}
 					</h1>

@@ -5,9 +5,9 @@ import { useDispatch, useSelector } from "react-redux";
 
 const Sorts = () => {
 	const dispatch = useDispatch();
-	const flags = useSelector(state => state.countries);
+	const countries = useSelector(state => state.countriesFiltered);
 	const handleSort = value => {
-		dispatch(setSort(value, flags));
+		dispatch(setSort(value, countries));
 	};
 	return (
 		<section className={s.sorts}>
