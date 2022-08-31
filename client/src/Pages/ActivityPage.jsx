@@ -3,20 +3,20 @@ import s from "./ActivityPage.module.css";
 import ActivityContainer from "../components/ActivityContainer/ActivityContainer.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import { getFlags } from "../Redux/actions/index.js";
+import Spinner from "../components/Spinner/Spinner.jsx";
 
 const ActivityPage = ({ handleActiveNav }) => {
 	const dispatch = useDispatch();
-	const flagsRedux = useSelector(state => state.countries);
-	const orderedNames = flagsRedux
-		.map(e => e.name.common)
-		.sort((a, b) => a.localeCompare(b));
+	const loading = useSelector(state => state.loading);
+	const countries = useSelector(state => state.countries);
 	useEffect(() => {
-		!flagsRedux.length && dispatch(getFlags());
+		!countries.length && dispatch(getFlags());
+
 		handleActiveNav(true);
-	}, [handleActiveNav, dispatch, flagsRedux]);
+	}, [handleActiveNav, dispatch, countries.length]);
 	return (
 		<div className={s.activityPage}>
-			<ActivityContainer countries={orderedNames} />
+			{loading ? <Spinner /> : <ActivityContainer />}
 		</div>
 	);
 };

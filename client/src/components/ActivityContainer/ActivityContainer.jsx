@@ -1,107 +1,131 @@
 import React, { useState } from "react";
 import s from "./ActivityContainer.module.css";
-import Input from "../Input/Input";
-import Label from "../Label/Label";
 import Walking from "../../svg/Walking";
 import Button from "../Button/Button.jsx";
 import { useSelector } from "react-redux";
-import { validation } from "../../helpers/validation.js";
+// import { validation } from "../../helpers/validation.js";
 
 const ActivityContainer = () => {
 	const countries = useSelector(state => state.countries);
-	const [data, setData] = useState({});
-	const difficulties = ["one", "two", "three", "four", "five"];
-	const seasons = ["Summer", "Spring", "Winter", "Autumn"];
-	const [error, setError] = useState({});
+	const [data, setData] = useState({
+		name: "",
+		difficulty: 1,
+		season: "",
+		duration: 0,
+		countries: [],
+	});
+
+	// const [error, setError] = useState({});
 	const handleInputsChange = e => {
+		console.log(e.target);
 		setData(prev => ({
 			...prev,
 			[e.target.name]: e.target.value,
 		}));
-		setError({
+		// setError({
+		// 	...data,
+		// 	[e.target.name]: e.target.value,
+		// });
+	};
+
+	const handleSelect = e => {
+		setData({
 			...data,
-			[e.target.name]: e.target.value,
+			countries: data.countries.every(el => el !== e.target.value)
+				? [...data.countries, e.target.value]
+				: data.countries,
 		});
 	};
+
+	const handleDeleteSelect = country_name => {
+		setData(actualState => ({
+			...actualState,
+			countries: actualState.countries.filter(el => el !== country_name),
+		}));
+	};
+
 	return (
 		<div className={s.formContainer}>
 			<Walking className={s.walking} />
 			<form method="POST" className={s.form} onSubmit={e => e.preventDefault()}>
-				<button onClick={() => console.log("data: ", data)}>data</button>
-				<button onClick={() => console.log("error: ", error)}>error</button>
 				<h2 className={s.title}>Create Activity</h2>
-				<Label text="Name:" />
-				{/* <Input type="text" name="name" onChange={e => console.log(e)} /> */}
+				<label htmlFor="name" className={s.label}>
+					Name:
+				</label>
 				<input
-					type="text"
+					type={"text"}
 					name="name"
-					onChange={e => console.log(e.target.value)}
+					value={data.name}
+					onChange={e => handleInputsChange(e)}
+					className={s.input}
 				/>
-				<section className={s.selectContainer}>
+				<div className={s.selectContainer}>
 					<div>
-						<Label text="Difficulty:" />
-						<select
+						<label htmlFor="difficulty" className={s.label}>
+							Difficulty:
+						</label>
+						<input
+							type="number"
 							name="difficulty"
-							className={s.select}
+							value={data.difficulty}
 							onChange={e => handleInputsChange(e)}
-						>
-							<option hidden value={"default"} className={s.option} disabled>
-								Choose a difficulty
-							</option>
-							{difficulties.map((el, i) => (
-								<option key={el} value={el} className={s.option}>
-									{i + 1}
-								</option>
-							))}
-						</select>
+							className={s.input}
+						/>
 					</div>
 					<div>
-						<Label text="Season:" />
-						<select
-							id=""
+						<label htmlFor="season" className={s.label}>
+							Season:
+						</label>
+						<input
+							type="text"
 							name="season"
-							className={s.select}
-							defaultValue={"default"}
+							value={data.season}
 							onChange={e => handleInputsChange(e)}
-						>
-							<option hidden value={"default"} className={s.option} disabled>
-								Choose a season
-							</option>
-							{seasons.map(el => (
-								<option key={el} value={el} className={s.option}>
-									{el}
-								</option>
-							))}
-						</select>
+							className={s.input}
+						/>
 					</div>
-				</section>
-				<Label text="Duration: (in minutes)" />
-				<Input
+				</div>
+				<label htmlFor="duration" className={s.label}>
+					Duration: (in minutes)
+				</label>
+				<input
 					type="number"
+					value={data.duration}
 					name="duration"
 					onChange={e => handleInputsChange(e)}
+					className={s.input}
 				/>
-				<Label text="Countries:" />
+				<label htmlFor="countries" className={s.label}>
+					Countries:
+				</label>
 				<select
 					name="countries"
-					id=""
 					className={s.select}
-					defaultValue={"default"}
-					onChange={e => handleInputsChange(e)}
+					defaultValue="default"
+					onChange={e => handleSelect(e)}
 				>
-					<option hidden value={"default"} className={s.option} disabled>
-						Choose an option
+					<option value="default" hidden disabled>
+						Choose:
 					</option>
-					{countries.map(el => (
-						<option
-							key={el.name.common}
-							value={el.name.common}
-							className={s.option}
-						>
-							{el.name.common}
-						</option>
-					))}
+					{countries
+						?.sort((a, b) => a.name.localeCompare(b.name))
+						.map(el => (
+							<option key={el.name} value={el.name} className={s.option}>
+								{el.name}
+							</option>
+						))}
 				</select>
+				<ul className={`${data.countries.length && s.countriesContainer}`}>
+					{data.countries?.map(el => (
+						<li
+							key={el}
+							className={s.countriesName}
+							onClick={() => handleDeleteSelect(el)}
+						>
+							<p>{el} &times;</p>
+						</li>
+					))}
+				</ul>
 				<Button text="Create" propClass="formButton" />
 			</form>
 		</div>
