@@ -97,8 +97,8 @@ A continuación se detallaran los requerimientos mínimos para la aprobación de
 
 - [✅] React
 - [✅] Redux
-- [ ] Express
-- [ ] Sequelize - Postgres
+- [✅] Express
+- [✅] Sequelize - Postgres
 
 ## Frontend
 
@@ -137,7 +137,7 @@ Se debe desarrollar una aplicación de React/Redux que contenga las siguientes p
   - Dificultad
   - Duración
   - Temporada
-- [ ] Posibilidad de seleccionar/agregar varios países en simultáneo
+- [✅] Posibilidad de seleccionar/agregar varios países en simultáneo
 - [✅] Botón/Opción para crear una nueva actividad turística
 
 > Es requisito que el formulario de creación esté validado con JavaScript y no sólo con validaciones HTML. Pueden agregar las validaciones que consideren. Por ejemplo: Que el nombre de la actividad no pueda contener símbolos, que la duración no pueda exceder determinado valor, etc.
@@ -180,7 +180,7 @@ Se debe desarrollar un servidor en Node/Express con las siguientes rutas:
 - [✅] **GET /countries?name="..."**:
   - Obtener los países que coincidan con el nombre pasado como query parameter (No necesariamente tiene que ser una matcheo exacto)
   - Si no existe ningún país mostrar un mensaje adecuado
-- [ ] **POST /activities**:
+- [✅] **POST /activities**:
   - Recibe los datos recolectados desde el formulario controlado de la ruta de creación de actividad turística por body
   - Crea una actividad turística en la base de datos, relacionada con los países correspondientes
 

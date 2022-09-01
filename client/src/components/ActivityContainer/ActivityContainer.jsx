@@ -2,30 +2,34 @@ import React, { useState } from "react";
 import s from "./ActivityContainer.module.css";
 import Walking from "../../svg/Walking";
 import Button from "../Button/Button.jsx";
-import { useSelector } from "react-redux";
-// import { validation } from "../../helpers/validation.js";
+import { useDispatch, useSelector } from "react-redux";
+import { postActivity } from "../../Redux/actions";
+import validation from "../../helpers/validation.js";
 
 const ActivityContainer = () => {
 	const countries = useSelector(state => state.countries);
+	const [canSubmit, setCanSubmit] = useState(false);
+	const dispatch = useDispatch();
 	const [data, setData] = useState({
 		name: "",
 		difficulty: 1,
 		season: "",
-		duration: 0,
+		duration: 1,
 		countries: [],
 	});
+	const [formErrors, setFormErrors] = useState({});
 
-	// const [error, setError] = useState({});
 	const handleInputsChange = e => {
-		console.log(e.target);
 		setData(prev => ({
 			...prev,
-			[e.target.name]: e.target.value,
+			[e.target.name]: e.target.value.trim().toLowerCase(),
 		}));
-		// setError({
-		// 	...data,
-		// 	[e.target.name]: e.target.value,
-		// });
+		setFormErrors(
+			validation({
+				...data,
+				[e.target.name]: e.target.value.trim().toLowerCase(),
+			})
+		);
 	};
 
 	const handleSelect = e => {
@@ -35,6 +39,12 @@ const ActivityContainer = () => {
 				? [...data.countries, e.target.value]
 				: data.countries,
 		});
+		setFormErrors(
+			validation({
+				...data,
+				countries: data.countries,
+			})
+		);
 	};
 
 	const handleDeleteSelect = country_name => {
@@ -42,13 +52,32 @@ const ActivityContainer = () => {
 			...actualState,
 			countries: actualState.countries.filter(el => el !== country_name),
 		}));
+		setFormErrors(
+			validation({
+				...data,
+				countries: data.countries,
+			})
+		);
+	};
+
+	const handleSubmit = (e, formData) => {
+		e.preventDefault();
+		setCanSubmit(true);
+		dispatch(postActivity(formData));
 	};
 
 	return (
 		<div className={s.formContainer}>
 			<Walking className={s.walking} />
-			<form method="POST" className={s.form} onSubmit={e => e.preventDefault()}>
+			<form
+				method="POST"
+				className={s.form}
+				onSubmit={e => handleSubmit(e, data)}
+			>
 				<h2 className={s.title}>Create Activity</h2>
+				<pre style={{ fontSize: "14px", color: "white" }}>
+					{JSON.stringify(formErrors, undefined, 2)}
+				</pre>
 				<label htmlFor="name" className={s.label}>
 					Name:
 				</label>
@@ -57,7 +86,7 @@ const ActivityContainer = () => {
 					name="name"
 					value={data.name}
 					onChange={e => handleInputsChange(e)}
-					className={s.input}
+					className={`${s.input} ${formErrors.name && s.problema}`}
 				/>
 				<div className={s.selectContainer}>
 					<div>
@@ -69,7 +98,7 @@ const ActivityContainer = () => {
 							name="difficulty"
 							value={data.difficulty}
 							onChange={e => handleInputsChange(e)}
-							className={s.input}
+							className={`${s.input} ${formErrors.difficulty && s.problema}`}
 						/>
 					</div>
 					<div>
@@ -81,7 +110,7 @@ const ActivityContainer = () => {
 							name="season"
 							value={data.season}
 							onChange={e => handleInputsChange(e)}
-							className={s.input}
+							className={`${s.input} ${formErrors.season && s.problema}`}
 						/>
 					</div>
 				</div>
@@ -93,14 +122,14 @@ const ActivityContainer = () => {
 					value={data.duration}
 					name="duration"
 					onChange={e => handleInputsChange(e)}
-					className={s.input}
+					className={`${s.input} ${formErrors.duration && s.problema}`}
 				/>
 				<label htmlFor="countries" className={s.label}>
 					Countries:
 				</label>
 				<select
 					name="countries"
-					className={s.select}
+					className={`${s.select} ${formErrors.countries && s.problema}`}
 					defaultValue="default"
 					onChange={e => handleSelect(e)}
 				>

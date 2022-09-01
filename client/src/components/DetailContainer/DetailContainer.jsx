@@ -7,11 +7,11 @@ const DetailContainer = props => {
 		<div className={s.detailContainer}>
 			<div
 				className={s.bg__image}
-				style={{ backgroundImage: `url(${info?.flag})` }}
+				style={{ backgroundImage: `url(${info[0]?.flag})` }}
 			></div>
 			<div className={s.info}>
 				<table className={s.tg}>
-					<caption className={s.caption}>{info?.name}</caption>
+					<caption className={s.caption}>{info[0]?.name}</caption>
 					<tbody>
 						<tr>
 							<th className={s.tableData}>continents</th>
@@ -19,9 +19,9 @@ const DetailContainer = props => {
 							<th className={s.tableData}>capital</th>
 						</tr>
 						<tr>
-							<td className={s.tableData}>{info?.continent}</td>
-							<td className={s.tableData}>{info?.id}</td>
-							<td className={s.tableData}>{info?.capital}</td>
+							<td className={s.tableData}>{info[0]?.continent}</td>
+							<td className={s.tableData}>{info[0]?.id}</td>
+							<td className={s.tableData}>{info[0]?.capital}</td>
 						</tr>
 						<tr>
 							<th className={s.tableData}>subregion</th>
@@ -29,14 +29,21 @@ const DetailContainer = props => {
 							<th className={s.tableData}>population</th>
 						</tr>
 						<tr>
-							<td className={s.tableData}>{info?.subregion}</td>
-							<td className={s.tableData}>{info?.area}</td>
-							<td className={s.tableData}>{info?.population}</td>
+							<td className={s.tableData}>{info[0]?.subregion}</td>
+							<td className={s.tableData}>{info[0]?.area}</td>
+							<td className={s.tableData}>{info[0]?.population}</td>
 						</tr>
 					</tbody>
 				</table>
 				<section>
 					<h3 className={s.activitiesTitle}>Tourist Activities:</h3>
+					<ul>
+						{info[0].Activities?.map(el => (
+							<li key={el.id} className={s.activityItem}>
+								{el.name}
+							</li>
+						))}
+					</ul>
 				</section>
 			</div>
 		</div>

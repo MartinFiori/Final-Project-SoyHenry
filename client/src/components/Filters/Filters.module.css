@@ -1,5 +1,8 @@
 .filterContainer {
-	width: 200px;
+	width: 250px;
+	background: #e3e3e3;
+	padding: 20px;
+	border-radius: 5px;
 }
 
 .radio {

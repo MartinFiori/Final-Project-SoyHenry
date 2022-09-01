@@ -5,6 +5,7 @@ const initialState = {
 	countriesFiltered: [],
 	flagDetail: {},
 	continents: [],
+	activities: [],
 	loading: true,
 	sortby: "",
 	filters: {},
@@ -55,12 +56,6 @@ function rootReducer(state = initialState, { type, payload }) {
 					actualPage: 1,
 				},
 			};
-		case actions.CLEAR_FILTERS:
-			return {
-				...state,
-				countriesFiltered: payload,
-				filters: {},
-			};
 		case actions.SET_ACTUAL_PAGE:
 			return {
 				...state,
@@ -70,18 +65,15 @@ function rootReducer(state = initialState, { type, payload }) {
 					countriesPerPage: payload.quantity,
 				},
 			};
-		// case actions.RESET_PAGE:
-		// 	return {
-		// 		...state,
-		// 		pagination: {
-		// 			...state.pagination,
-		// 			actualPage: payload,
-		// 		},
-		// 	};
 		case actions.GET_CONTINENTS:
 			return {
 				...state,
 				continents: payload,
+			};
+		case actions.GET_ACTIVITIES:
+			return {
+				...state,
+				activities: payload,
 			};
 		default:
 			return state;

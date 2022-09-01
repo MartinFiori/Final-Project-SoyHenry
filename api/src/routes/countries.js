@@ -23,16 +23,21 @@ router.get("/", async (req, res) => {
 	}
 });
 
-router.get("/detail/:id", async (req, res) => {
+router.get("/details/:id", async (req, res) => {
+	const { id } = req.params;
 	try {
-		const { id } = req.params;
-		const allCountries = await controller.countDB();
-		if (id) {
-			let found = await allCountries.find(el => el.id === id);
-			found
-				? res.status(200).json(found)
-				: res.status(404).json("Country not found 💣");
-		}
+		// const allCountries = await controller.countDB();
+		// if (id) {
+		// 	let found = await allCountries.find(el => el.id === id);
+		// 	found
+		// 		? res.status(200).json(found)
+		// 		: res.status(404).json("Country not found 💣");
+		// }
+		const found = await Country.findAll({
+			where: { id: id },
+			include: [Activity],
+		});
+		res.send(found);
 	} catch (error) {
 		console.log(error);
 	}
@@ -45,20 +50,21 @@ router.get("/activities", async (req, res) => {
 
 router.post("/activities", async (req, res) => {
 	const { name, difficulty, season, duration, countries } = req.body;
+	setTimeout(() => {
+		console.log(req.body);
+	}, 1000);
 	try {
 		let newActivity = await Activity.create({
 			name,
 			difficulty,
 			duration,
 			season,
+			countries: countries,
 		});
 		let countryDB = await Country.findAll({
 			where: { name: countries },
-			include: {
-				model: Activity,
-			},
 		});
-		countryDB.addActivity(newActivity);
+		newActivity.addCountries(countryDB);
 		res.send("Activity created 🌈");
 	} catch (error) {
 		console.log(error);

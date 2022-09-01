@@ -56,6 +56,10 @@
 	border: none;
 }
 
+.problema {
+	outline: 2px solid #d0342c !important;
+}
+
 .input:focus {
 	outline: 2px solid var(--blue);
 }

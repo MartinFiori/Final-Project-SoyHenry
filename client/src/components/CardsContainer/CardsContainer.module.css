@@ -12,18 +12,22 @@
 
 .pagination {
 	display: flex;
-	gap: 10px;
 	justify-content: space-evenly;
-	margin-inline: auto;
+	margin: 20px auto;
 }
 
 .active {
 	background: var(--dark-blue);
-	font-size: 20px;
 	color: var(--white);
+	border-radius: 50px;
+}
+
+.actualPage {
+	cursor: pointer;
+	font-size: 14px;
 	width: 40px;
 	height: 40px;
 	text-align: center;
+	font-weight: bold;
 	line-height: 40px;
-	border-radius: 500px;
 }

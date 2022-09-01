@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import s from "./Filters.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { clearFilters, setFilters } from "../../Redux/actions";
+import { setFilters } from "../../Redux/actions";
 
 const Filters = () => {
 	const dispatch = useDispatch();
@@ -9,11 +9,8 @@ const Filters = () => {
 	const countries = useSelector(state => state.countries);
 	const [continents, setContinents] = useState([]);
 	const [activeFilter, setActiveFilter] = useState(filtersRedux);
-	const filters = [
-		{ name: "continents", filterTypes: continents },
-		{ name: "activities", filterTypes: ["caminar", "comer", "pasear"] },
-		{ name: "comidas", filterTypes: ["pancho", "manteca", "pizza"] },
-	];
+	const filters = [{ name: "continents", filterTypes: continents }];
+
 	const handleSetFilter = (filterType, value) => {
 		dispatch(setFilters({ [filterType]: value }, countries));
 		setActiveFilter({
@@ -22,14 +19,9 @@ const Filters = () => {
 		});
 	};
 
-	const handleResetFilters = () => {
-		setActiveFilter({});
-		dispatch(clearFilters());
-	};
-
 	useEffect(() => {
 		!continents.length &&
-			setContinents(["Todos", ...new Set(countries.map(el => el.continent))]);
+			setContinents(["All", ...new Set(countries.map(el => el.continent))]);
 	}, [countries, continents]);
 
 	return (
@@ -62,12 +54,6 @@ const Filters = () => {
 					</div>
 				</div>
 			))}
-			<input
-				type="reset"
-				value="Reset filters"
-				className={s.resetFilters}
-				onClick={handleResetFilters}
-			/>
 		</form>
 	);
 };

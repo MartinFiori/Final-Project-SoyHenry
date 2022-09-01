@@ -16,7 +16,10 @@ const CardsContainer = ({ list }) => {
 	const currentCountries = list.slice(firstCountry, lastCountry);
 	let pages = useMemo(() => {
 		let arr = [];
-		for (let i = 1; i <= Math.ceil(list.length / countriesPerPage); i++) {
+		// for (let i = 1; i <= Math.ceil(list.length / countriesPerPage); i++) {
+		// 	arr.push(i);
+		// }
+		for (let i = 1; i <= 25; i++) {
 			arr.push(i);
 		}
 		return arr;
@@ -28,9 +31,10 @@ const CardsContainer = ({ list }) => {
 				{pages.map(page => (
 					<h1
 						key={page}
-						style={{ fontSize: "30px", cursor: "pointer" }}
-						className={`${actualPage === page && s.active}`}
-						onClick={() => dispatch(setActualPage(page, countriesPerPage))}
+						className={`${s.actualPage} ${actualPage === page && s.active}`}
+						onClick={() =>
+							dispatch(setActualPage(page, actualPage === 1 ? 10 : 9))
+						}
 					>
 						{page}
 					</h1>

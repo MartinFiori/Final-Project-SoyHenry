@@ -1,10 +1,10 @@
 export const GET_FLAGS = "GET_FLAGS";
 export const GET_FLAG_DETAILS = "GET_FLAG_DETAILS";
+export const GET_ACTIVITIES = "GET_ACTIVITIES";
 export const CHANGE_LOADING = "CHANGE_LOADING";
 export const SET_SORT = "SET_SORT";
 export const SET_FILTERS = "SET_FILTERS";
 export const SET_PAGINATION = "SET_PAGINATION";
 export const SET_ACTUAL_PAGE = "SET_ACTUAL_PAGE";
-export const CLEAR_FILTERS = "CLEAR_FILTERS";
-export const RESET_PAGE = "RESET_PAGE";
 export const GET_CONTINENTS = "GET_CONTINENTS";
+export const POST_ACTIVITY = "POST_ACTIVITY";

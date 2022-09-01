@@ -42,7 +42,9 @@ const countDB = async () => {
 				},
 			});
 		});
-		const country = await Country.findAll();
+		const country = await Country.findAll({
+			include: [Activity],
+		});
 		return country;
 	} catch (error) {
 		res.status(404).send(error);

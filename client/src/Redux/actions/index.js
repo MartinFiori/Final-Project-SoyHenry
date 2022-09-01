@@ -1,13 +1,13 @@
 import * as actions from "./action-types";
+import axios from "axios";
 
 export const getFlags = () => async dispatch => {
 	dispatch(changeLoading(true));
 	try {
-		const req = await fetch("http://localhost:3001/countries/");
-		const data = await req.json();
+		const req = await axios("http://localhost:3001/countries/");
 		dispatch({
 			type: actions.GET_FLAGS,
-			payload: data,
+			payload: req.data,
 		});
 	} catch (error) {
 		dispatch(changeLoading(false));
@@ -19,13 +19,12 @@ export const getFlags = () => async dispatch => {
 export const getDetails = flag_name => async dispatch => {
 	dispatch(changeLoading(true));
 	try {
-		const req = await fetch(
-			`http://localhost:3001/countries/detail/${flag_name}`
+		const req = await axios(
+			`http://localhost:3001/countries/details/${flag_name}`
 		);
-		const data = await req.json();
 		dispatch({
 			type: actions.GET_FLAG_DETAILS,
-			payload: data,
+			payload: req.data,
 		});
 	} catch (error) {
 		dispatch(changeLoading(false));
@@ -59,9 +58,9 @@ export const getContinents = countries => dispatch => {
 	});
 };
 
-export const setFilters = (filters, arrCountries) => dispatch => {
+export const setFilters = (filters, arrCountries, allFilters) => dispatch => {
 	let arr =
-		filters.continents === "Todos"
+		filters.continents === "All"
 			? arrCountries
 			: arrCountries.filter(el => filters.continents === el.continent);
 	dispatch({
@@ -90,16 +89,25 @@ export const setActualPage = (num, countriesPerPage) => dispatch => {
 	});
 };
 
-export const clearFilters = () => dispatch => {
-	dispatch({
-		type: actions.CLEAR_FILTERS,
-		payload: [],
-	});
-};
+export function postActivity(payload) {
+	return async function () {
+		const json = await axios.post(
+			"http://localhost:3001/countries/activities",
+			payload
+		);
+		return json;
+	};
+}
 
-// export const resetPageFilter = () => dispatch => {
-// 	dispatch({
-// 		type: actions.RESET_PAGE,
-// 		payload: 1,
-// 	});
-// };
+export function getActivities() {
+	return async function (dispatch) {
+		const activities = await axios.get(
+			"http://localhost:3001/countries/activities"
+		);
+		const activitiesName = activities.data.map(el => el.name.toLowerCase());
+		dispatch({
+			type: actions.GET_ACTIVITIES,
+			payload: [...new Set(activitiesName)],
+		});
+	};
+}

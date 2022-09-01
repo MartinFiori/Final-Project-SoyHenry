@@ -5,12 +5,10 @@ import { changeLoading } from "../../Redux/actions";
 import Button from "../Button/Button";
 import s from "./Card.module.css";
 
-const Card = ({ country, flags, continent, id, population }) => {
+const Card = ({ country, flags, continent, id }) => {
 	const dispatch = useDispatch();
 	return (
 		<div className={s.card}>
-			<h1 style={{ fontSize: "25px" }}>{population}</h1>
-			<h1 style={{ fontSize: "25px" }}>{country}</h1>
 			<img className={s.card__image} src={flags} alt={country} />
 			<div className={s.bg__info}></div>
 			<div className={s.card__info}>
